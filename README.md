@@ -1,18 +1,21 @@
-# MIDI Chords
+# MIDI Chord Pack
 
 ## Description
 
-This projects can generate MIDI chords and produces a MIDI Chord pack.
+This projects can generate MIDI chords and produces a MIDI chord pack.
 It only covers chords and no chord progressions.
 
 The goal is to have the MIDI files for quickly building a chord track, e.g. by searching for the chord in the DAW clip browser.
 
-A non-goal is to generate chord progressions. If you are looking for this, consider:
+A non-goal (see [background](#background)) is to generate chord progressions. If you are looking for this, consider instead:
+
 * https://github.com/ldrolez/free-midi-chords
 * Dedicated Tools / Plugins
     * My personal favorite is [Plugin Boutique Scaler 2](https://www.pluginboutique.com/meta_products/6414)
 
-> Download it in the Release Page!
+## Download
+
+Download it in the [releases page](https://github.com/Fannon/midi-chords/releases)!
 
 ## Installation
 

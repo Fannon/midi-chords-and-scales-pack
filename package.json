@@ -1,8 +1,13 @@
 {
   "name": "midi-chords-gen",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Generates MIDI chords for quickly throwing together chord tracks.",
   "main": "src/generateChordPack.mjs",
+  "homepage": "https://github.com/Fannon/midi-chord-pack",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Fannon/midi-chord-pack.git"
+  },
   "scripts": {
     "start": "node src/generateChordPack.mjs",
     "test": "echo \"Error: no test specified\" && exit 1"

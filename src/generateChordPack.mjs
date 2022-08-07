@@ -1,9 +1,15 @@
 import { exec } from "child_process";
 import * as fs from "fs-extra"
 
+/** 
+ * Notes that we want to generate chords for 
+ */
 const notes = ['C', 'C#', 'Db', 'D', 'D#', 'Eb', 'E', 'F', 'F#', 'Gb', 'G', 'G#', 'Ab', 'A', 'A#', 'Bb', 'B']
 
-const chordExtensions = {
+/** 
+ * Chord types to generate. Left (key) is filename, right (value) is the chords2midi name 
+ */
+const chordTypes = {
     'Maj': '',
     'min': 'm',
     '5': '5',
@@ -28,8 +34,8 @@ fs.emptyDirSync('./dist')
 fs.ensureDirSync('./dist/essential')
 
 for (const note of notes) {
-    for (const chordExtensionName in chordExtensions) {
-        const chordExtension = chordExtensions[chordExtensionName]
+    for (const chordExtensionName in chordTypes) {
+        const chordExtension = chordTypes[chordExtensionName]
         
         const filePath = `dist/essential/${note}/${note}${chordExtensionName}.mid`
         
