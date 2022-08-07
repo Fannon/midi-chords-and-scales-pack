@@ -31,36 +31,44 @@ const chordTypes = {
 }
 
 fs.emptyDirSync('./dist')
-fs.ensureDirSync('./dist/essential')
 
 for (const note of notes) {
+
+    console.log(`--> ${note}`)
+
     for (const chordExtensionName in chordTypes) {
         const chordExtension = chordTypes[chordExtensionName]
+                
+        const commandExecutable = 'python src/chords2midi/c2m.py '
+
+        let createChords = commandExecutable
+        createChords += `${note}${chordExtension} `
+        createChords += `-t 5 -p long -d 4 -B `
+        createChords += `-N ${note}${chordExtensionName} `
+        createChords += `--output dist/chords/${note}/${note}${chordExtensionName}.mid`
         
-        const filePath = `dist/essential/${note}/${note}${chordExtensionName}.mid`
+        fs.ensureDirSync(`./dist/chords/${note}`)
+        executeCommand(createChords)
+
+        let createChordsWithBass = commandExecutable
+        createChordsWithBass += `${note}${chordExtension} `
+        createChordsWithBass += `-t 5 -p long -d 4 -B --key ${note} `
+        createChordsWithBass += `-N ${note}${chordExtensionName} `
+        createChordsWithBass += `--output dist/chords+bass/${note}/${note}${chordExtensionName}.mid`
         
-        let command = 'python src/chords2midi/c2m.py '
-        command += `${note}${chordExtension} `
-        command += `-t 5 -p long -d 4 -B --key ${note} `
-        command += `-N ${note}${chordExtensionName} `
-        command += `--output ${filePath}`
-        
-        fs.ensureDirSync(`./dist/essential/${note}`)
-        
-        console.log(`--> ${filePath}`)
-        exec(command, (error, stdout, stderr) => {
-            if (error) {
-                console.log(`error: ${error.message}`);
-                return;
-            }
-            if (stderr) {
-                console.log(`stderr: ${stderr}`);
-                return;
-            }
-            if (stdout) {
-                console.log(stdout)
-            }
-        });
-        
+        fs.ensureDirSync(`./dist/chords+bass/${note}`)
+        executeCommand(createChordsWithBass)
     }
+}
+
+function executeCommand(command) {
+    exec(command, (error, stdout, stderr) => {
+        if (error) {
+            return console.log(`error: ${error.message}`);
+        } else if (stderr) {
+            return console.log(`stderr: ${stderr}`);
+        } else if (stdout) {
+            console.log(stdout)
+        }
+    });
 }

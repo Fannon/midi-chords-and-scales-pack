@@ -2,10 +2,12 @@
 
 ## Description
 
-This projects can generate MIDI chords and produces a MIDI chord pack.
-It only covers chords and no chord progressions.
+This projects can generate MIDI chords (~300) and produces a MIDI chord pack.
+It only covers chords and **no chord progressions**.
 
-The goal is to have the MIDI files for quickly building a chord track, e.g. by searching for the chord in the DAW clip browser.
+The goal is to have the MIDI files for quickly building a chord track, e.g. by searching for the chord in the DAW clip browser. When placed in the DAW the MIDI clips have a readable chord title.
+
+<img src="./assets/bitwig-example.png" width="400" title="Example in Bitwig for a chord track and using clip browser" />
 
 A non-goal (see [background](#background)) is to generate chord progressions. If you are looking for this, consider instead:
 
@@ -15,7 +17,7 @@ A non-goal (see [background](#background)) is to generate chord progressions. If
 
 ## Download
 
-Download it in the [releases page](https://github.com/Fannon/midi-chords/releases)!
+Download can be found in the [releases page](https://github.com/Fannon/midi-chords/releases).
 
 ## Installation
 
@@ -32,7 +34,7 @@ pip install -r requirements.txt --user
 # Install Node.js dependencies
 npm install
 
-# Generate Chords -> will be written to ./dist/essential/
+# Generate Chords -> will be written to ./dist/
 npm start
 ```
 
@@ -43,7 +45,7 @@ The generator script can be found in [src/generateChordPack.mjs](./src/generateC
 Don't get scammed by paying money for chord packs :) 
 There are free and better alternatives out there and this project should add one more that fits my own needs. 
 
-I explicitly did not want to add chord progressions because I believe that this is done better by understanding a bit of music theory (e.g. [Circle of Fifths](https://en.wikipedia.org/wiki/Circle_of_fifths)) or using music theory related tools. By being forced to explicitly construct chord progressions from individual chords, much more interesting things and happy accidents can happen. 
+I explicitly did not want to add chord progressions because I believe that this is usually done better by understanding a bit of music theory (e.g. [Circle of Fifths](https://en.wikipedia.org/wiki/Circle_of_fifths)) or using music theory related tools. By being forced to explicitly construct chord progressions from individual chords, much more interesting things ("happy accidents") can happen.
 
 ## Attribution 
 
