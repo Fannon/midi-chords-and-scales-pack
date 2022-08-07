@@ -9,7 +9,8 @@
     "url": "https://github.com/Fannon/midi-chord-pack.git"
   },
   "scripts": {
-    "start": "node src/generateChordPack.mjs",
+    "build": "node src/generateChordPack.mjs",
+    "start": "npm run start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Simon Heimler",

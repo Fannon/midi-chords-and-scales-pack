@@ -43,7 +43,7 @@ for (const note of notes) {
 
         let createChords = commandExecutable
         createChords += `${note}${chordExtension} `
-        createChords += `-t 5 -p long -d 4 -B `
+        createChords += `-t 5 -p long -d 4 `
         createChords += `-N ${note}${chordExtensionName} `
         createChords += `--output dist/chords/${note}/${note}${chordExtensionName}.mid`
         
@@ -54,9 +54,9 @@ for (const note of notes) {
         createChordsWithBass += `${note}${chordExtension} `
         createChordsWithBass += `-t 5 -p long -d 4 -B --key ${note} `
         createChordsWithBass += `-N ${note}${chordExtensionName} `
-        createChordsWithBass += `--output dist/chords+bass/${note}/${note}${chordExtensionName}.mid`
+        createChordsWithBass += `--output dist/chords-with-bass/${note}/${note}${chordExtensionName}.mid`
         
-        fs.ensureDirSync(`./dist/chords+bass/${note}`)
+        fs.ensureDirSync(`./dist/chords-with-bass/${note}`)
         executeCommand(createChordsWithBass)
     }
 }
