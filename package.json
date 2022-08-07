@@ -1,0 +1,15 @@
+{
+  "name": "midi-chords-gen",
+  "version": "1.0.0",
+  "description": "Generates MIDI chords for quickly throwing together chord tracks.",
+  "main": "src/generateChordPack.mjs",
+  "scripts": {
+    "start": "node src/generateChordPack.mjs",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Simon Heimler",
+  "license": "MIT",
+  "dependencies": {
+    "fs-extra": "^10.1.0"
+  }
+}
