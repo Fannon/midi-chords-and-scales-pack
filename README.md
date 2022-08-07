@@ -2,12 +2,12 @@
 
 ## Description
 
-This projects can generate MIDI chords (~300) and produces a MIDI chord pack.
+This projects generates MIDI chords (~300) and produces a MIDI chord pack.
 It only covers chords and **no chord progressions**.
 
 The goal is to have the MIDI files for quickly building a chord track, e.g. by searching for the chord in the DAW clip browser. When placed in the DAW the MIDI clips have a readable chord title.
 
-<img src="./assets/bitwig-example.png" width="400" title="Example in Bitwig for a chord track and using clip browser" />
+<img src="./assets/bitwig-example.png" width="500" title="Bitwig for a 'chord track' and use of the clip browser" />
 
 A non-goal (see [background](#background)) is to generate chord progressions. If you are looking for this, consider instead:
 
@@ -18,6 +18,8 @@ A non-goal (see [background](#background)) is to generate chord progressions. If
 ## Download
 
 Download can be found in the [releases page](https://github.com/Fannon/midi-chords/releases).
+
+There is a version with an additional bass root note  (`chords-with-bass.zip`) and a version without (`chords.zip`).
 
 ## Installation
 
