@@ -7,7 +7,6 @@ import * as fs from "fs-extra"
  * Notes that we want to generate chords for 
  */
  const notes = ['C', 'C#', 'Db', 'D', 'D#', 'Eb', 'E', 'F', 'F#', 'Gb', 'G', 'G#', 'Ab', 'A', 'A#', 'Bb', 'B']
-//  const notes = ['C']
 
 /** Octave to generate the chords for */
 const noteOctave = 4
@@ -42,36 +41,42 @@ const noteOctave = 4
 fs.ensureDirSync('./dist')
 fs.emptyDirSync('./dist')
 
-for (const currentNote of notes) {
+generateChords(notes, chordTypes, 4)
 
-    console.log(`--> ${currentNote}`)
+function generateChords(notes: string[], chordTypes: {[title: string]: string}, octave: number) {
 
-    for (const chordExtensionName in chordTypes) {
-        const chordExtension = chordTypes[chordExtensionName]
-        const chord = Chord.getChord(chordExtension, `${currentNote}${noteOctave}`); 
+    for (const currentNote of notes) {
 
-        console.log(' ')
-        console.log('---------------------------------------------------------------')
-        console.log(`${currentNote}${chordExtensionName}:`, chord.symbol, chord.aliases)
-        // console.debug(chord)
-        
-        if (chord.empty) {
-            console.error(chord)
-            throw new Error(`Could not process chord alias: "${currentNote}${chordExtension}"`)
+        for (const chordExtensionName in chordTypes) {
+    
+            // Generate Chord
+            const chordExtension = chordTypes[chordExtensionName]
+            const chord = Chord.getChord(chordExtension, `${currentNote}${noteOctave}`);
+             
+            console.log(' ')
+            console.log('---------------------------------------------------------------')
+            console.log(`${currentNote}${chordExtensionName}:`, chord.symbol, chord.aliases, chord.notes)
+            // console.debug(chord)
+            if (chord.empty) {
+                console.error(chord)
+                throw new Error(`Could not process chord alias: "${currentNote}${chordExtension}"`)
+            }
+            
+            // Create MIDI track
+            const track = new midiWriter.Track()
+            track.addTrackName(`${currentNote}${chordExtensionName}`)
+            track.addCopyright(`https://github.com/Fannon/midi-chord-pack`)
+            const note = new midiWriter.NoteEvent({pitch: chord.notes as midiWriter.Pitch[], duration: '1'});
+            track.addEvent(note);
+            
+            // Write to MIDI file
+            const filePath = `./dist/chords/${currentNote}/${currentNote}${chordExtensionName}.mid`
+            const write = new midiWriter.Writer(track);
+            fs.ensureDirSync(`./dist/chords/${currentNote}`)
+            fs.writeFileSync(filePath, write.buildFile())
+            console.log(`Output: ${filePath}`)
+            console.log('---------------------------------------------------------------')
         }
-        
-        const track = new midiWriter.Track()
-        track.addTrackName(`${currentNote}${chordExtensionName}`)
-        track.addCopyright(`https://github.com/Fannon/midi-chord-pack`)
-        const note = new midiWriter.NoteEvent({pitch: chord.notes as midiWriter.Pitch[], duration: '1'});
-        track.addEvent(note);
-        
-        // Write to MIDI file
-        const filePath = `./dist/chords/${currentNote}/${currentNote}${chordExtensionName}.mid`
-        const write = new midiWriter.Writer(track);
-        fs.ensureDirSync(`./dist/chords/${currentNote}`)
-        fs.writeFileSync(filePath, write.buildFile())
-        console.log(`Output: ${filePath}`)
-        console.log('---------------------------------------------------------------')
     }
+    
 }

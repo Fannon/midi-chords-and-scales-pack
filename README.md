@@ -2,7 +2,7 @@
 
 ## Description
 
-This projects generates MIDI chords (~350), which is published as a MIDI chord pack.
+This projects generates MIDI chords (~350) and publishes it as a [free MIDI chord pack](https://github.com/Fannon/midi-chords/releases).
 
 The goal is to have the MIDI files for quickly building a chord track, e.g. by searching for the chord in the DAW clip browser. When placed in the DAW the MIDI clips have a readable chord title.
 
@@ -48,4 +48,7 @@ I explicitly did not want to add chord progressions because I believe that this 
 
 ## Attribution 
 
+* Uses the following libraries that do the heavy lifting:
+    * https://www.npmjs.com/package/@tonaljs/tonal 
+    * https://www.npmjs.com/package/midi-writer-js
 * Inspired by https://github.com/ldrolez/free-midi-chords 
