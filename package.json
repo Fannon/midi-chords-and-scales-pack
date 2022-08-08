@@ -1,6 +1,6 @@
 {
   "name": "midi-chords-gen",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Generates MIDI chords for quickly throwing together chord tracks.",
   "main": "src/generateChordPack.mjs",
   "homepage": "https://github.com/Fannon/midi-chord-pack",
@@ -16,6 +16,14 @@
   "author": "Simon Heimler",
   "license": "MIT",
   "dependencies": {
-    "fs-extra": "^10.1.0"
+    "@tonaljs/tonal": "^4.6.5",
+    "fs-extra": "^10.1.0",
+    "midi-writer-js": "^2.1.0",
+    "midifile-ts": "^1.5.1",
+    "ts-node": "^10.9.1"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^9.0.13",
+    "typescript": "^4.7.4"
   }
 }
