@@ -9,10 +9,13 @@ import * as fs from "fs-extra"
  const notes = ['C', 'C#', 'Db', 'D', 'D#', 'Eb', 'E', 'F', 'F#', 'Gb', 'G', 'G#', 'Ab', 'A', 'A#', 'Bb', 'B']
 //  const notes = ['C']
 
+/** Octave to generate the chords for */
+const noteOctave = 4
+
  /** 
-  * Chord types to generate. Left (key) is filename, right (value) is the chords2midi name 
+  * Chord types to generate. Left (key) is title / filename, right (value) is the tonal library alias 
   */
- const chordTypes: {[fileName: string]: string} = {
+ const chordTypes: {[title: string]: string} = {
      'Maj': '',
      'min': 'm',
      '5': '5',
@@ -30,15 +33,14 @@ import * as fs from "fs-extra"
      'add9': 'add9',
      'Maj9': 'maj9',
      'min9': 'm9',
-     
      'min6': 'm6',
      'aug7': 'aug7',
      'dim7': 'dim7',
      '7b5': '7b5'
 }
 
- 
-// fs.removeSync('./dist')
+fs.ensureDirSync('./dist')
+fs.emptyDirSync('./dist')
 
 for (const currentNote of notes) {
 
@@ -46,11 +48,12 @@ for (const currentNote of notes) {
 
     for (const chordExtensionName in chordTypes) {
         const chordExtension = chordTypes[chordExtensionName]
-        const chord = Chord.getChord(chordExtension, `${currentNote}4`); 
+        const chord = Chord.getChord(chordExtension, `${currentNote}${noteOctave}`); 
+
         console.log(' ')
         console.log('---------------------------------------------------------------')
         console.log(`${currentNote}${chordExtensionName}:`, chord.symbol, chord.aliases)
-        console.debug(chord)
+        // console.debug(chord)
         
         if (chord.empty) {
             console.error(chord)

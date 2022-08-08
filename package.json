@@ -9,8 +9,8 @@
     "url": "https://github.com/Fannon/midi-chord-pack.git"
   },
   "scripts": {
-    "build": "node src/generateChordPack.mjs",
-    "start": "npm run start",
+    "build": "ts-node src/generateChords.ts",
+    "start": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Simon Heimler",
@@ -19,7 +19,6 @@
     "@tonaljs/tonal": "^4.6.5",
     "fs-extra": "^10.1.0",
     "midi-writer-js": "^2.1.0",
-    "midifile-ts": "^1.5.1",
     "ts-node": "^10.9.1"
   },
   "devDependencies": {
