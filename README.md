@@ -2,8 +2,7 @@
 
 ## Description
 
-This projects generates MIDI chords (~300) and produces a MIDI chord pack.
-It only covers chords and **no chord progressions**.
+This projects generates MIDI chords (~350), which is published as a MIDI chord pack.
 
 The goal is to have the MIDI files for quickly building a chord track, e.g. by searching for the chord in the DAW clip browser. When placed in the DAW the MIDI clips have a readable chord title.
 
@@ -15,11 +14,13 @@ A non-goal (see [background](#background)) is to generate chord progressions. If
 * Dedicated Tools / Plugins
     * My personal favorite is [Plugin Boutique Scaler 2](https://www.pluginboutique.com/meta_products/6414)
 
+If you are missing any chords or have other feedback, feel free to reach out via [GitHub issues](https://github.com/Fannon/midi-chord-pack/issues).
+
 ## Download
 
-Download can be found in the [releases page](https://github.com/Fannon/midi-chords/releases).
+Downloads can be found in the [releases page](https://github.com/Fannon/midi-chords/releases).
 
-There is a version with an additional bass root note  (`chords-with-bass.zip`) and a version without (`chords.zip`).
+I consider adding chords with bass notes in the future as a separate download.
 
 ## Installation
 
@@ -27,12 +28,8 @@ This is only necessary if you want to customize and build your own chord pack, o
 
 Prerequisites
 * [Node.js](https://nodejs.org/en/)
-* [Python 3](https://www.python.org/downloads/)
 
 ```bash
-# Install Python dependencies
-pip install -r requirements.txt --user 
-
 # Install Node.js dependencies
 npm install
 
@@ -40,7 +37,7 @@ npm install
 npm start
 ```
 
-The generator script can be found in [src/generateChordPack.mjs](./src/generateChordPack.mjs).
+The generator script can be found in [src/generateChords.ts](./src/generateChords.ts).
 
 ## Background
 
@@ -51,5 +48,4 @@ I explicitly did not want to add chord progressions because I believe that this 
 
 ## Attribution 
 
-* Uses https://github.com/Miserlou/chords2midi for generating the chord MIDI. All the hard work is done there.
 * Inspired by https://github.com/ldrolez/free-midi-chords 
