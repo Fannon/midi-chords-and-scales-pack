@@ -20,7 +20,7 @@ interface ChordInfo {
 const noteOctave = 4
 
  /** 
-  * Chord types to generate. Left (key) is title / filename, right (value) is the tonal library alias 
+  * Chord types to generate. 
   * @see https://github.com/tonaljs/tonal/blob/main/packages/chord-type/data.ts for theoretically supported chord types
   */
  const chordTypesVariant1: ChordInfo[] = [
@@ -51,12 +51,14 @@ const noteOctave = 4
  ]
 
 fs.ensureDirSync('./dist')
-fs.emptyDirSync('./dist')
 
+generateChords('chords', notes, chordTypesVariant1, 4, true)
 generateChords('chords-without-title', notes, chordTypesVariant1, 4, false)
-generateChords('chords-with-title', notes, chordTypesVariant1, 4, true)
 
 function generateChords(variantName: string, notes: string[], chordTypes: ChordInfo[], octave: number, writeTitle: boolean) {
+
+    fs.ensureDirSync(`./dist/${variantName}`)
+    fs.emptyDirSync(`./dist/${variantName}`)
 
     for (const currentNote of notes) {
 
@@ -71,7 +73,7 @@ function generateChords(variantName: string, notes: string[], chordTypes: ChordI
              
             console.log(' ')
             console.log('---------------------------------------------------------------')
-            console.log(`${variantName}/${currentNote}${chordFileName}.mid]`, chord.symbol, chord.aliases, chord.notes)
+            console.log(`${variantName}/${currentNote} ${chordFileName}.mid`, chord.symbol, chord.aliases, chord.notes)
             // console.debug(chord)
             if (chord.empty) {
                 console.error(chord)
@@ -88,7 +90,7 @@ function generateChords(variantName: string, notes: string[], chordTypes: ChordI
             track.addEvent(note);
 
             // Write to MIDI file
-            const filePath = `./dist/${variantName}/${chordFileName}/${currentNote}${chordFileName}.mid`
+            const filePath = `./dist/${variantName}/${chordFileName}/${currentNote} ${chordFileName}.mid`
             const write = new midiWriter.Writer(track);
             fs.ensureDirSync(`./dist/${variantName}/${chordFileName}`)
             fs.writeFileSync(filePath, write.buildFile())
