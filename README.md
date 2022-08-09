@@ -5,7 +5,7 @@
 This projects generates (~400) MIDI chords and (~300) MIDI scales, which can be downloaded as a [free MIDI pack](https://github.com/Fannon/midi-chords/releases).
 
 The goal is to have the MIDI files for quickly building a chord track, e.g. by searching for the chord in the DAW clip browser. When placed in the DAW the MIDI clips have a readable chord title.
-A MIDI scale can help with quantizing the notes.
+A MIDI scale could, e.g. help with quantizing the notes.
 
 <img src="./assets/bitwig-example.png" width="500" title="Bitwig for a 'chord track' and use of the clip browser" />
 
