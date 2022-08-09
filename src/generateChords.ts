@@ -88,9 +88,9 @@ function generateChords(variantName: string, notes: string[], chordTypes: ChordI
             track.addEvent(note);
 
             // Write to MIDI file
-            const filePath = `./dist/${variantName}/${currentNote}/${currentNote}${chordFileName}.mid`
+            const filePath = `./dist/${variantName}/${chordFileName}/${currentNote}${chordFileName}.mid`
             const write = new midiWriter.Writer(track);
-            fs.ensureDirSync(`./dist/${variantName}/${currentNote}`)
+            fs.ensureDirSync(`./dist/${variantName}/${chordFileName}`)
             fs.writeFileSync(filePath, write.buildFile())
             console.log(`Output: ${filePath}`)
             console.log('---------------------------------------------------------------')
