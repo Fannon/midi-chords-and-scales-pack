@@ -1,7 +1,13 @@
 import { Chord } from "@tonaljs/tonal";
 import * as midiWriter from 'midi-writer-js'
-
 import * as fs from "fs-extra"
+
+interface ChordInfo {
+    /** Chord symbol, as understood by tonal.js */
+    symbol: string
+    /** Filename. Falls back to symbol if not given */
+    fileName?: string
+}
 
 /** 
  * Notes that we want to generate chords for 
@@ -14,65 +20,65 @@ const noteOctave = 4
  /** 
   * Chord types to generate. Left (key) is title / filename, right (value) is the tonal library alias 
   */
- const chordTypes: {[title: string]: string} = {
-     'Maj': '',
-     'min': 'm',
-     '5': '5',
-     'sus2': 'sus2',
-     'sus4': 'sus4',
-     'Maj7': 'M7',
-     'min7': 'm7',
-     'aug': 'aug',
-     'dim': 'dim',
-     '2': '2',
-     '6': '6',
-     '7': '7',
-     '9': '9',
-     '69': '69',
-     'add9': 'add9',
-     'Maj9': 'maj9',
-     'min9': 'm9',
-     'min6': 'm6',
-     'aug7': 'aug7',
-     'dim7': 'dim7',
-     '7b5': '7b5'
-}
+ const chordTypesVariant1: ChordInfo[] = [
+    { symbol: '', fileName: 'Maj'},
+    { symbol: 'm', fileName: 'min' },
+    { symbol: 'sus2' },
+    { symbol: 'sus4' },
+    { symbol: '5' },
+    { symbol: '7' },
+    { symbol: 'M7', fileName: 'Maj7' },
+    { symbol: 'm7', fileName: 'min7' },
+    { symbol: '2' },
+    { symbol: '6' },
+    { symbol: '69' },
+    { symbol: '9' },
+    { symbol: 'maj9', fileName: 'Maj9' },
+    { symbol: 'm9', fileName: 'min9' },
+    { symbol: 'add9' },
+    { symbol: 'aug' },
+    { symbol: 'aug7' },
+    { symbol: 'dim' },
+    { symbol: 'dim7' },
+    { symbol: '7b5' },
+ ]
 
 fs.ensureDirSync('./dist')
 fs.emptyDirSync('./dist')
 
-generateChords(notes, chordTypes, 4)
+generateChords('chords-variant-1', notes, chordTypesVariant1, 4)
 
-function generateChords(notes: string[], chordTypes: {[title: string]: string}, octave: number) {
+function generateChords(variantName: string, notes: string[], chordTypes: ChordInfo[], octave: number) {
 
     for (const currentNote of notes) {
 
-        for (const chordExtensionName in chordTypes) {
-    
+        for (const chordInfo of chordTypes) {
+
+            const chordSymbol = chordInfo.symbol
+            const chordFileName = chordInfo.fileName != null ? chordInfo.fileName : chordSymbol
+
             // Generate Chord
-            const chordExtension = chordTypes[chordExtensionName]
-            const chord = Chord.getChord(chordExtension, `${currentNote}${noteOctave}`);
+            const chord = Chord.getChord(chordSymbol, `${currentNote}${noteOctave}`);
              
             console.log(' ')
             console.log('---------------------------------------------------------------')
-            console.log(`${currentNote}${chordExtensionName}:`, chord.symbol, chord.aliases, chord.notes)
+            console.log(`${variantName}/${currentNote}${chordFileName}.mid]`, chord.aliases, chord.notes)
             // console.debug(chord)
             if (chord.empty) {
                 console.error(chord)
-                throw new Error(`Could not process chord alias: "${currentNote}${chordExtension}"`)
+                throw new Error(`Could not process chord alias: "${currentNote}${chordSymbol}"`)
             }
             
             // Create MIDI track
             const track = new midiWriter.Track()
-            track.addTrackName(`${currentNote}${chordExtensionName}`)
             track.addCopyright(`https://github.com/Fannon/midi-chord-pack`)
-            const note = new midiWriter.NoteEvent({pitch: chord.notes as midiWriter.Pitch[], duration: '1'});
+            const note = new midiWriter.NoteEvent({pitch: chord.notes as midiWriter.Pitch[], duration: '1', velocity: 64 });
             track.addEvent(note);
-            
+
             // Write to MIDI file
-            const filePath = `./dist/chords/${currentNote}/${currentNote}${chordExtensionName}.mid`
+            const filePath = `./dist/${variantName}/${currentNote}/${currentNote}${chordFileName}.mid`
             const write = new midiWriter.Writer(track);
-            fs.ensureDirSync(`./dist/chords/${currentNote}`)
+            fs.ensureDirSync(`./dist/${variantName}/${currentNote}`)
             fs.writeFileSync(filePath, write.buildFile())
             console.log(`Output: ${filePath}`)
             console.log('---------------------------------------------------------------')
