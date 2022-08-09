@@ -2,7 +2,7 @@
 
 ## Description
 
-This projects generates MIDI chords (~350) and publishes it as a [free MIDI chord pack](https://github.com/Fannon/midi-chords/releases).
+This projects generates (400+) MIDI chords and publishes it as a [free MIDI chord pack](https://github.com/Fannon/midi-chords/releases).
 
 The goal is to have the MIDI files for quickly building a chord track, e.g. by searching for the chord in the DAW clip browser. When placed in the DAW the MIDI clips have a readable chord title.
 
@@ -20,7 +20,13 @@ If you are missing any chords or have other feedback, feel free to reach out via
 
 Downloads can be found in the [releases page](https://github.com/Fannon/midi-chords/releases).
 
-I consider adding chords with bass notes in the future as a separate download.
+The can be multiple variants, depending on your needs. Currently there are:
+* `chords-with-title` (recommended)
+    * Contains a MIDI track title, which some DAWs (e.g. Ableton Live) display in the imported Clip
+    * The chord title may differ from the filename, as it can be shorter and case sensitive (which does not work well for the file names)
+* `chords-without-title`:
+    * Contains no MIDI track title
+    * For a DAW (e.g. Reaper) that displays both MIDI title AND filename, this might work better.
 
 ## Installation
 
