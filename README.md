@@ -15,7 +15,7 @@ A non-goal (see [background](#background)) is to generate chord progressions. If
 * Dedicated Tools / Plugins
     * My personal favorite is [Plugin Boutique Scaler 2](https://www.pluginboutique.com/meta_products/6414)
 
-If you are missing any chords or have other feedback, feel free to reach out via [GitHub issues](https://github.com/Fannon/midi-chord-pack/issues).
+If you are missing any chords or have other feedback, feel free to reach out via [KVR Thread](https://www.kvraudio.com/forum/viewtopic.php?t=585287) or [GitHub issues](https://github.com/Fannon/midi-chord-pack/issues).
 
 ## Download
 
