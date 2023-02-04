@@ -7,8 +7,6 @@ This projects generates (~400) MIDI chords and (~300) MIDI scales, which can be 
 The goal is to have the MIDI files for quickly building a chord track, e.g. by searching for the chord in the DAW clip browser. When placed in the DAW the MIDI clips have a readable chord title.
 A MIDI scale can help with quantizing the notes.
 
-<img src="./assets/bitwig-example.png" width="500" title="Bitwig for a 'chord track' and use of the clip browser" />
-
 A non-goal (see [background](#background)) is to generate chord progressions. If you are looking for this, consider instead:
 
 * https://github.com/ldrolez/free-midi-chords
@@ -28,8 +26,25 @@ The can be multiple variants, depending on your needs. Currently there are:
 * `chords-without-title`:
     * Contains no MIDI track title
     * For a DAW (e.g. Reaper) that displays both MIDI title AND filename, this might work better.
-* `scales` (recommended)
+* `scales-full-range`: Adds the scale notes from Octave 0 to 8 (recommended)
+* `scales`: Adds scale note only on Octave 4, like chords
 * `scales-without-title`
+
+## Tips and Tricks
+
+### Bitwig
+
+Create a chord and / or a scale track and add the midi files there, e.g. by searching for them in Browser - Clips.
+
+<img src="./assets/bitwig-example.png" width="500" title="Bitwig for a 'chord track' and use of the clip browser" />
+
+Use a Note Grid device to quantize notes to the chord or scale track.
+
+<img src="./assets/bitwig-note-quantize.png" width="500" />
+
+Show the scale or chord track by using "layered editing" mode and locking the chord / scale track 
+
+<img src="./assets/bitwig-scale-track.png" width="500" />
 
 ## Installation
 

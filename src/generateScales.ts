@@ -54,8 +54,9 @@ const noteOctave = 4
 
 fs.ensureDirSync('./dist')
 
-generateScales('scales', notes, scaleTypesVariant1, 4, true)
-generateScales('scales-without-title', notes, scaleTypesVariant1, 4, false)
+generateScales('scales', notes, scaleTypesVariant1, noteOctave, true)
+generateScales('scales-full-range', notes, scaleTypesVariant1, 0, true)
+generateScales('scales-without-title', notes, scaleTypesVariant1, noteOctave, false)
 
 function generateScales(variantName: string, notes: string[], scaleTypes: ScaleInfo[], octave: number, writeTitle: boolean) {
 
@@ -69,13 +70,14 @@ function generateScales(variantName: string, notes: string[], scaleTypes: ScaleI
             const scaleSymbol = scaleInfo.symbol
             const scaleFileName = scaleInfo.fileName != null ? scaleInfo.fileName : scaleSymbol
             const scaleTitle = scaleInfo.title != null ? scaleInfo.title : scaleSymbol
+            const filePath = `./dist/${variantName}/${scaleFileName}/${currentNote} ${scaleFileName} scale.mid`
 
             // Generate scale
-            const scale = Scale.get(`${currentNote}${noteOctave} ${scaleSymbol}`);
+            const scale = Scale.get(`${currentNote}${octave} ${scaleSymbol}`);
              
             console.log(' ')
             console.log('---------------------------------------------------------------')
-            console.log(`${variantName}/${currentNote}${scaleFileName}.mid`, scale.aliases, scale.notes)
+            console.log('Writing: ' + filePath, scale.aliases, scale.notes)
             // console.debug(scale)
             if (scale.empty) {
                 console.error(scale)
@@ -88,15 +90,21 @@ function generateScales(variantName: string, notes: string[], scaleTypes: ScaleI
                 track.addTrackName(`${currentNote} ${scaleTitle}`)
             }
             track.addCopyright(`https://github.com/Fannon/midi-scale-pack`)
-            const note = new midiWriter.NoteEvent({pitch: scale.notes as midiWriter.Pitch[], duration: '1', velocity: 64 });
-            track.addEvent(note);
+            track.addEvent(new midiWriter.NoteEvent({pitch: scale.notes as midiWriter.Pitch[], duration: '1', velocity: 63, startTick: 0 }));
+
+            // Produce scales with a full range of notes, in all relevant octaves (1-7)
+            if (variantName === 'scales-full-range') {
+                for (const i of [1, 2, 3, 4, 5, 6, 7, 8]) {
+                    const additionalScale = Scale.get(`${currentNote}${i} ${scaleSymbol}`);
+                    track.addEvent(new midiWriter.NoteEvent({pitch: additionalScale.notes as midiWriter.Pitch[], duration: '1', velocity: 63, startTick: 0 }));
+                }
+            }
 
             // Write to MIDI file
-            const filePath = `./dist/${variantName}/${scaleFileName}/${currentNote} ${scaleFileName}.mid`
+            
             const write = new midiWriter.Writer(track);
             fs.ensureDirSync(`./dist/${variantName}/${scaleFileName}`)
             fs.writeFileSync(filePath, write.buildFile())
-            console.log(`Output: ${filePath}`)
             console.log('---------------------------------------------------------------')
         }
     }

@@ -17,7 +17,7 @@ interface ChordInfo {
  const notes = ['C', 'C#', 'Db', 'D', 'D#', 'Eb', 'E', 'F', 'F#', 'Gb', 'G', 'G#', 'Ab', 'A', 'A#', 'Bb', 'B']
 
 /** Octave to generate the chords for */
-const noteOctave = 4
+const noteOctave = 3
 
  /** 
   * Chord types to generate. 
