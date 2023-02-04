@@ -5,7 +5,7 @@
 This projects generates (~400) MIDI chords and (~300) MIDI scales, which can be downloaded as a [free MIDI pack](https://github.com/Fannon/midi-chords/releases).
 
 The goal is to have the MIDI files for quickly building a chord track, e.g. by searching for the chord in the DAW clip browser. When placed in the DAW the MIDI clips have a readable chord title.
-A MIDI scale can help with quantizing the notes.
+A MIDI scale could, e.g. help with quantizing the notes.
 
 A non-goal (see [background](#background)) is to generate chord progressions. If you are looking for this, consider instead:
 
@@ -13,7 +13,7 @@ A non-goal (see [background](#background)) is to generate chord progressions. If
 * Dedicated Tools / Plugins
     * My personal favorite is [Plugin Boutique Scaler 2](https://www.pluginboutique.com/meta_products/6414)
 
-If you are missing any chords or have other feedback, feel free to reach out via [GitHub issues](https://github.com/Fannon/midi-chord-pack/issues).
+If you are missing any chords or have other feedback, feel free to reach out via [KVR Thread](https://www.kvraudio.com/forum/viewtopic.php?t=585287) or [GitHub issues](https://github.com/Fannon/midi-chord-pack/issues).
 
 ## Download
 
@@ -42,7 +42,7 @@ Use a Note Grid device to quantize notes to the chord or scale track.
 
 <img src="./assets/bitwig-note-quantize.png" width="500" />
 
-Show the scale or chord track by using "layered editing" mode and locking the chord / scale track 
+Show the scale or chord track by using "layered editing" mode and locking the chord / scale track. See also video by Mattias Holmgren: [Awesome Piano Roll Scale Tricks // Scale Guide in Bitwig Studio](https://www.youtube.com/watch?v=HspXCtDVcPg).
 
 <img src="./assets/bitwig-scale-track.png" width="500" />
 
